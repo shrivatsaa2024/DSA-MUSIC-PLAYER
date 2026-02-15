@@ -25,3 +25,43 @@ class Playlist:
             self.tail.next = new_song
             new_song.prev = self.tail
             self.tail = new_song
+
+
+#PART 4 ----------------------------------------------------------------------
+
+import random
+
+
+def shuffle_playlist(self):
+    if not self.head:
+        print("Playlist is empty")
+        return
+
+   # songs into a list
+    songs = []
+    temp = self.head
+    while temp:
+        songs.append(temp)
+        temp = temp.next
+
+    # Shuffle the list
+    random.shuffle(songs)
+
+    for i in range(len(songs)):
+        if i > 0:
+            songs[i].prev = songs[i-1]
+        else:
+            songs[i].prev = None
+
+        if i < len(songs) - 1:
+            songs[i].next = songs[i+1]
+        else:
+            songs[i].next = None
+
+    # update
+    self.head = songs[0]
+    self.tail = songs[-1]
+    self.current = self.head
+
+    print("Playlist shuffled")
+
